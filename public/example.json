@@ -1,0 +1,120 @@
+{
+  "attendanceLog": [
+      {
+          "attended": true,
+          "id": 1,
+          "lessonId": 1,
+          "studentId": 1
+      },
+      {
+          "attended": true,
+          "id": 2,
+          "lessonId": 1,
+          "studentId": 2
+      },
+      {
+          "attended": true,
+          "id": 3,
+          "lessonId": 1,
+          "studentId": 3
+      },
+      {
+          "attended": true,
+          "id": 4,
+          "lessonId": 1,
+          "studentId": 4
+      },
+      {
+          "attended": true,
+          "id": 5,
+          "lessonId": 2,
+          "studentId": 1
+      },
+      {
+          "attended": false,
+          "id": 6,
+          "lessonId": 2,
+          "studentId": 2
+      },
+      {
+          "attended": true,
+          "id": 7,
+          "lessonId": 2,
+          "studentId": 3
+      },
+      {
+          "attended": true,
+          "id": 8,
+          "lessonId": 2,
+          "studentId": 4
+      },
+      {
+        "attended": false,
+        "id": 9,
+        "lessonId": 3,
+        "studentId": 2
+    },
+    {
+        "attended": true,
+        "id": 10,
+        "lessonId": 3,
+        "studentId": 3
+    },
+    {
+        "attended": true,
+        "id": 11,
+        "lessonId": 3,
+        "studentId": 4
+    }
+  ],
+  "lessons": [
+      {
+          "date": 1726940930,
+          "id": 1
+      },
+      {
+          "date": 1693677653,
+          "id": 2
+      },{
+        "date": 1693677653,
+        "id": 3
+    }
+  ],
+  "teams": [
+      {
+          "id": 1,
+          "name": "Team A",
+          "students": [
+              {
+                  "id": 1,
+                  "name": "John Doe"
+              },
+              {
+                  "id": 2,
+                  "name": "Jane Smith"
+              },
+              {
+                "id": 5,
+                "name": "Matt Cook"
+            }
+          ]
+      },
+      {
+          "id": 2,
+          "name": "Team B",
+          "students": [
+              {
+                  "id": 3,
+                  "name": "Alice Johnson"
+              },
+              {
+                  "id": 4,
+                  "name": "Bob Brown"
+              },{
+                "id": 6,
+                "name": "Oscar Brown"
+            }
+          ]
+      }
+  ]
+}

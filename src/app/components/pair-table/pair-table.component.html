@@ -1,0 +1,20 @@
+<div class="container mt-4" *ngIf="pairs.length > 0">
+    <div class="row mb-5">
+        <div class="col">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">Team A</th>
+                        <th class="text-center">Team B</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pair of pairs">
+                        <td class="text-center">{{ pair.teamA }}</td>
+                        <td class="text-center">{{ pair.teamB }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

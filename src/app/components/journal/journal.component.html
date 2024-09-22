@@ -1,0 +1,29 @@
+<div class="container mt-4">
+    <div class="row mb-5">
+        <div class="col">
+            <h3 class="text-center">Journal</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">Name</th>
+                        <th class="text-center" *ngFor="let date of formattedDates">{{ date }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let team of teams; let i = index">
+                        <tr [ngClass]="{'bg-blue': i === 0, 'bg-yellow': i === 1}">
+                            <td [attr.colspan]="lessons.length + 1" class="text-center font-weight-bold">{{ team.name }}
+                            </td>
+                        </tr>
+                        <tr *ngFor="let student of team.students">
+                            <td [ngClass]="{'bg-blue': i === 0, 'bg-yellow': i === 1}">{{ student.name }}</td>
+                            <td class="text-center" *ngFor="let lesson of lessons">
+                                {{ checkAttendance(student.id, lesson.id) }}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
