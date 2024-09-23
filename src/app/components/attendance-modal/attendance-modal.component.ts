@@ -31,9 +31,8 @@ export class AttendanceModalComponent {
         studentId: this.selectedStudentId,
         lessonId: this.selectedLessonId,
         attended: true, 
-      };
-  
-      this.http.post('http://13.60.83.249:8085/api/v1/attendancelog', attendanceLog).subscribe(
+      }; 
+      this.http.post('http://13.60.83.249:8085/journalApp/api/v1/attendancelog', attendanceLog).subscribe( 
         () => {
           this.activeModal.close('Attendance added');
           location.reload(); 

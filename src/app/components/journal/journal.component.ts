@@ -78,8 +78,8 @@ export class JournalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get<Data>('http://13.60.83.249:8085/api/v1/journal').subscribe(
-      //this.http.get<Data>('http://localhost:8080/api/v1/journal').subscribe(
+    this.http.get<Data>('http://13.60.83.249:8085/journalApp/api/v1/journal').subscribe(
+    //  this.http.get<Data>('http://localhost:8080/api/v1/journal').subscribe(
       (data) => {
         this.attendanceLog = data.attendanceLogs; 
         this.lessons = data.lessons;

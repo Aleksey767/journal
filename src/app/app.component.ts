@@ -27,8 +27,7 @@ export class AppComponent {
   }
 
   loadTeams() {
-    this.http.get<{ teams: Team[] }>('http://13.60.83.249:8085/api/v1/journal').subscribe(
-    //  this.http.get<{ teams: Team[] }>('http://localhost:8080/api/v1/journal').subscribe(
+    this.http.get<{ teams: Team[] }>('http://13.60.83.249:8085/journalApp/api/v1/journal').subscribe( 
       (data) => {
         this.teams = data.teams;
       },
