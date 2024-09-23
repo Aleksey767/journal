@@ -1,120 +1,125 @@
 {
-  "attendanceLog": [
+    "attendanceLogs": [
       {
-          "attended": true,
-          "id": 1,
-          "lessonId": 1,
-          "studentId": 1
+        "id": 1,
+        "studentId": 1,
+        "lessonId": 1,
+        "isAttended": true
       },
       {
-          "attended": true,
-          "id": 2,
-          "lessonId": 1,
-          "studentId": 2
+        "id": 2,
+        "studentId": 2,
+        "lessonId": 1,
+        "isAttended": true
       },
       {
-          "attended": true,
-          "id": 3,
-          "lessonId": 1,
-          "studentId": 3
+        "id": 3,
+        "studentId": 3,
+        "lessonId": 1,
+        "isAttended": false
       },
       {
-          "attended": true,
-          "id": 4,
-          "lessonId": 1,
-          "studentId": 4
+        "id": 4,
+        "studentId": 4,
+        "lessonId": 1,
+        "isAttended": true
       },
       {
-          "attended": true,
-          "id": 5,
-          "lessonId": 2,
-          "studentId": 1
+        "id": 5,
+        "studentId": 5,
+        "lessonId": 1,
+        "isAttended": true
       },
       {
-          "attended": false,
-          "id": 6,
-          "lessonId": 2,
-          "studentId": 2
+        "id": 6,
+        "studentId": 6,
+        "lessonId": 1,
+        "isAttended": true
       },
       {
-          "attended": true,
-          "id": 7,
-          "lessonId": 2,
-          "studentId": 3
+        "id": 7,
+        "studentId": 7,
+        "lessonId": 1,
+        "isAttended": true
       },
       {
-          "attended": true,
-          "id": 8,
-          "lessonId": 2,
-          "studentId": 4
+        "id": 8,
+        "studentId": 8,
+        "lessonId": 1,
+        "isAttended": true
       },
       {
-        "attended": false,
         "id": 9,
-        "lessonId": 3,
-        "studentId": 2
-    },
-    {
-        "attended": true,
+        "studentId": 9,
+        "lessonId": 1,
+        "isAttended": true
+      },
+      {
         "id": 10,
-        "lessonId": 3,
-        "studentId": 3
-    },
-    {
-        "attended": true,
-        "id": 11,
-        "lessonId": 3,
-        "studentId": 4
-    }
-  ],
-  "lessons": [
-      {
-          "date": 1726940930,
-          "id": 1
-      },
-      {
-          "date": 1693677653,
-          "id": 2
-      },{
-        "date": 1693677653,
-        "id": 3
-    }
-  ],
-  "teams": [
-      {
-          "id": 1,
-          "name": "Team A",
-          "students": [
-              {
-                  "id": 1,
-                  "name": "John Doe"
-              },
-              {
-                  "id": 2,
-                  "name": "Jane Smith"
-              },
-              {
-                "id": 5,
-                "name": "Matt Cook"
-            }
-          ]
-      },
-      {
-          "id": 2,
-          "name": "Team B",
-          "students": [
-              {
-                  "id": 3,
-                  "name": "Alice Johnson"
-              },
-              {
-                  "id": 4,
-                  "name": "Bob Brown"
-              },{
-                "id": 6,
-                "name": "Oscar Brown"
-            }
-          ]
+        "studentId": 10,
+        "lessonId": 1,
+        "isAttended": true
       }
-  ]
-}
+    ],
+    "lessons": [
+      {
+        "id": 1,
+        "date": 1726758000
+      }
+    ],
+    "teams": [
+      {
+        "id": 1,
+        "name": "Team Yellow",
+        "students": [
+          {
+            "id": 1,
+            "name": "Victoria Rusalovskaya"
+          },
+          {
+            "id": 2,
+            "name": "Rustem Andassov"
+          },
+          {
+            "id": 3,
+            "name": "Aidyn Ryzyk"
+          },
+          {
+            "id": 4,
+            "name": "Aliaksei Sazonau"
+          },
+          {
+            "id": 5,
+            "name": "Denis Savchuk"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Team Blue",
+        "students": [
+          {
+            "id": 6,
+            "name": "Dmitry Gaydabura"
+          },
+          {
+            "id": 7,
+            "name": "Maksym Yarema"
+          },
+          {
+            "id": 8,
+            "name": "Artem Voroshylin"
+          },
+          {
+            "id": 9,
+            "name": "Nuradil Zhaxylyk"
+          },
+          {
+            "id": 10,
+            "name": "Ruslana Buchynska"
+          }
+        ]
+      }
+    ]
+  }
+  

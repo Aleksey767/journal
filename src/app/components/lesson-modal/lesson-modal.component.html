@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h4 class="modal-title">Select Lesson Date</h4>
+    <button type="button" class="close" (click)="activeModal.close()">&times;</button>
+</div>
+<div class="modal-body">
+    <input type="date" [(ngModel)]="selectedDate" class="form-control" />
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="addLesson()">Add Lesson</button>
+    <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">Close</button>
+</div>
