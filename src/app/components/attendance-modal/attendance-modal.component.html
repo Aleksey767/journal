@@ -3,11 +3,11 @@
 </div>
 <div class="modal-body">
     <label for="student">Select Student:</label>
-    <select id="student" class="form-control" [(ngModel)]="selectedStudentId">
+    <select id="student" class="form-select" [(ngModel)]="selectedStudentId">
         <option *ngFor="let student of students" [value]="student.id">{{ student.name }}</option>
     </select>
     <label for="date" class="mt-3">Select Date:</label>
-    <select id="date" class="form-control" [(ngModel)]="selectedLessonId">
+    <select id="date" class="form-select" [(ngModel)]="selectedLessonId">
         <option *ngFor="let lesson of lessons" [value]="lesson.id">{{ formatDate(lesson.date) }}</option>
     </select>
 </div>

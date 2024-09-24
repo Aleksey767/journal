@@ -1,14 +1,23 @@
 .text-center {
     text-align: center;
 }
-.bg-blue {
-    background-color: rgba(0, 85, 177, 0.2);
+.bg-blue { 
+    background-color: rgba(0, 85, 177, 0.3);
+} 
+.container{
+    font-family: 'Roboto Mono',italic;
+    font-weight: 400;
 }
-
 .bg-yellow {
-    background-color: rgba(255, 191, 0, 0.2);
+    
+    background-color: rgba(255, 191, 0, 0.4);
 }
 
 .border-top {
-    border-top: 3px solid black; }
-
+    border-top: 2px solid black; }
+.btn {
+    flex: 1;
+    margin: 0 5px; 
+}
+ 
+     
