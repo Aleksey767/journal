@@ -1,11 +1,39 @@
-.list {
-  border: solid 1px #ccc;
-  min-height: 60px;
-  background: white;
-  border-radius: 4px;
-  overflow: hidden;
-  display: block;
+.team-table {
+  display: flex;
+  flex-direction: column;
+  
+  .list {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px;
+    
+    .header {
+      display: flex;
+      font-weight: bold;
+      
+      div {
+        flex: 1;
+        padding: 5px;
+        border-bottom: 1px solid #000;
+      }
+    }
+
+    .row {
+      display: flex;
+      cursor: move;
+
+      div {
+        flex: 1;
+        padding: 5px;
+        border-bottom: 1px solid #eee;
+      }
+      
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
   }
+}
   
   .cdk-drag {
     padding: 8px;

@@ -3,25 +3,39 @@ import { CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, moveItemInArray, t
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 
+
+interface Participant {
+  name: string;
+  scores: { [key: string]: number };
+}
+
 @Component({
   standalone: true,
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.scss',
-  imports: [CdkDropListGroup, CdkDropList, CdkDrag, MatDialogModule, CommonModule] // Importing DragDropModule
+  imports: [CdkDropListGroup, CdkDropList, CdkDrag, MatDialogModule, CommonModule]
 })
 
 
 
 export class StudentListComponent {
-    teamA = ['student1', 'student2', 'student3', 'student7'];
-    teamB = ['student4', 'student5', 'student6'];
+    teamA: Participant[] = [
+      {name: 'Student1', scores: {}},
+      {name: 'Student2', scores: {}}
+    ];
+    teamB: Participant[] = [
+      { name: 'Charlie', scores: {} },
+      { name: 'David', scores: {} }
+    ];
 
+    scoreColumns: string[] = []
 
+    constructor(public dialogRef: MatDialogRef<StudentListComponent>) {}
 
-  constructor(public dialogRef: MatDialogRef<StudentListComponent>) {}
+  
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<Participant[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -32,9 +46,26 @@ export class StudentListComponent {
     }
   }
 
+  addScoreColumn() {
+    const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString();
+        this.scoreColumns.push(formattedDate);
+        this.updateScores(formattedDate);
+  }
+
+  updateScores(scoreKey: string) {
+    this.teamA.forEach(participant => {
+      participant.scores[scoreKey] = Math.floor(Math.random() * 100);
+    });
+    this.teamB.forEach(participant => {
+      participant.scores[scoreKey] = Math.floor(Math.random() * 100);
+    });
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
+
 }
 
 

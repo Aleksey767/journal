@@ -1,37 +1,35 @@
 <mat-dialog-content>
-  <h2 mat-dialog-title>Перемещение студентов между командами</h2>
+  <h2 mat-dialog-title>Student list</h2>
   <div cdkDropListGroup>
-  <div class="row">
-    <div class="col-md-6">
-
-      <h3>Команда A</h3>
-      <div
-      cdkDropList
-      [cdkDropListData]="teamA"
-      id="teamAList"
-      class="list"
-      (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let student of teamA" cdkDrag>{{ student }}</div>
+    <div class="team-table">
+      <h2>Team Yellow</h2>
+      <div cdkDropList [cdkDropListData]="teamA" (cdkDropListDropped)="drop($event)" class="list">
+        <div class="header">
+          <div>Name</div>
+          <div *ngFor="let column of scoreColumns">{{ column }}</div>
+        </div>
+        <div *ngFor="let participant of teamA" cdkDrag class="row">
+          <div>{{ participant.name }}</div>
+          <div *ngFor="let column of scoreColumns">{{ participant.scores[column] || '-' }}</div>
+        </div>
       </div>
-
-    </div>
-    <div class="col-md-6">
-
-      <h3>Команда B</h3>
-      <div
-      cdkDropList
-      [cdkDropListData]="teamB"
-      id="teamBList"
-      class="list"
-      (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let student of teamB" cdkDrag>{{ student }}</div>
+    
+      <h2>Team Blue</h2>
+      <div cdkDropList [cdkDropListData]="teamB" (cdkDropListDropped)="drop($event)" class="list">
+        <div class="header">
+          <div>Name</div>
+          <div *ngFor="let column of scoreColumns">{{ column }}</div>
+        </div>
+        <div *ngFor="let participant of teamB" cdkDrag class="row">
+          <div>{{ participant.name }}</div>
+          <div *ngFor="let column of scoreColumns">{{ participant.scores[column] || '-' }}</div>
+        </div>
       </div>
-
-    </div>
+    </div>  
   </div>
-</div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
+  <button mat-button (click)="addScoreColumn()">Добавить колонку оценки</button>
   <button mat-button (click)="onNoClick()">Закрыть</button>
 </mat-dialog-actions>
