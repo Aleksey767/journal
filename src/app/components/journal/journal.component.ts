@@ -1,10 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LessonModalComponent } from '../lesson-modal/lesson-modal.component';
 import { AttendanceModalComponent } from '../attendance-modal/attendance-modal.component'; 
+import { StudentListComponent } from '../student-list/student-list.component'; 
+import { MatDialog } from '@angular/material/dialog';
+
 
 export interface Student {
   id: number;
@@ -52,7 +55,8 @@ export class JournalComponent implements OnInit {
   @Output() pairsGenerated = new EventEmitter<{ teamA: string; teamB: string }[]>();
 
 
-  constructor(private http: HttpClient, private modalService: NgbModal) { }
+
+  constructor(public dialog: MatDialog, private http: HttpClient, private modalService: NgbModal) { }
   openAddLessonModal() {
     const modalRef = this.modalService.open(LessonModalComponent);
     modalRef.result.then(
@@ -116,6 +120,18 @@ export class JournalComponent implements OnInit {
     modalRef.componentInstance.students = this.getStudents();
     modalRef.componentInstance.lessons = this.lessons;
   }
+
+  openStudentList() {
+    const dialogRef = this.dialog.open(StudentListComponent, {
+      width: '1200px', height: '800px',
+      data: {} 
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('modal window closed');
+    });
+  }
+
 
 
   getStudents(): { id: number; name: string }[] {
