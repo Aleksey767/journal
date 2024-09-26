@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { JournalComponent } from './components/journal/journal.component';
 import { GradesComponent } from './components/grades/grades.component';
 
-const routes: Routes = [{ path: '', redirectTo: '/', pathMatch: 'full' },
+const routes: Routes = [{ path: '', redirectTo: '/journal', pathMatch: 'full' },
 { path: 'journal', component: JournalComponent },
 { path: 'grades', component: GradesComponent }];
 

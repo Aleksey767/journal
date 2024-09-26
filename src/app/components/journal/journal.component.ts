@@ -111,8 +111,7 @@ export class JournalComponent implements OnInit {
     return log && log.isAttended ? '+' : '-';
   } 
 
-  setAttendance(studentId: number, lessonId: number, isAttended: boolean) {
-    // Обновляем локально для отображения на экране без перезагрузки
+  setAttendance(studentId: number, lessonId: number, isAttended: boolean) { 
     const log = this.attendanceLog.find(
       (log) => log.studentId === studentId && log.lessonId === lessonId
     );
@@ -122,8 +121,7 @@ export class JournalComponent implements OnInit {
     } else {
       this.attendanceLog.push({ studentId, lessonId, isAttended, id: Date.now() });
     }
-
-    // Отправка данных на сервер
+ 
     const requestBody = {
       studentId: studentId,
       lessonId: lessonId,
@@ -174,29 +172,7 @@ export class JournalComponent implements OnInit {
 
     this.pairsGenerated.emit(this.pairs);
   }
-
-  formatDates() {
-    this.formattedDates = this.lessons.map(lesson => {
-      const date = new Date(lesson.date * 1000);
-      const day = String(date.getDate()).padStart(2, '0');
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const year = date.getFullYear();
-      return `${day}.${month}.${year}`;
-    });
-  }
-
-  checkAttendance(studentId: number, lessonId: number): string {
-    const log = this.attendanceLog.find(
-      (log) => log.studentId === studentId && log.lessonId === lessonId
-    );
-    return log && log.isAttended ? '+' : '-';
-  }
-  openAddAttendanceModal() {
-    const modalRef = this.modalService.open(AttendanceModalComponent);
-    modalRef.componentInstance.students = this.getStudents();
-    modalRef.componentInstance.lessons = this.lessons;
-  }
-
+ 
   openStudentList() {
     const dialogRef = this.dialog.open(StudentListComponent, {
       width: '1200px', height: '800px',
@@ -207,11 +183,6 @@ export class JournalComponent implements OnInit {
       console.log('modal window closed');
     });
   }
-
-
-
-  getStudents(): { id: number; name: string }[] {
-    return this.teams.flatMap(team => team.students.map(student => ({ id: student.id, name: student.name })));
 
   private shuffleArray(array: any[]) {
     for (let i = array.length - 1; i > 0; i--) {

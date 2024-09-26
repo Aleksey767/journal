@@ -19,17 +19,14 @@ export class AppComponent {
 
   constructor() { }
 
-  // Метод для установки активной вкладки
   setActiveTab(tab: string) {
     this.activeTab = tab;
   }
 
-  // Метод для проверки, активна ли вкладка
   isActive(tab: string): boolean {
     return this.activeTab === tab;
   }
 
-  // Обработчик события для передачи данных в PairTableComponent
   onPairsGenerated(pairs: { teamA: string; teamB: string }[]) {
     this.pairs = pairs;
   }
