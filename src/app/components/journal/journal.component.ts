@@ -5,8 +5,8 @@ import { CommonModule } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LessonModalComponent } from '../lesson-modal/lesson-modal.component';
 import { AttendanceModalComponent } from '../attendance-modal/attendance-modal.component'; 
-import { StudentListComponent } from '../student-list/student-list.component'; 
 import { MatDialog } from '@angular/material/dialog';
+import { GradesComponent } from '../grades/grades.component';
 
 
 export interface Student {
@@ -174,7 +174,7 @@ export class JournalComponent implements OnInit {
   }
  
   openStudentList() {
-    const dialogRef = this.dialog.open(StudentListComponent, {
+    const dialogRef = this.dialog.open(GradesComponent, {
       width: '1200px', height: '800px',
       data: {} 
     });

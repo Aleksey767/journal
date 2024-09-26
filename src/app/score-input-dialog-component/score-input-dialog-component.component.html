@@ -1,11 +1,13 @@
-<h1 mat-dialog-title class="dialog-title">Введите оценку</h1>
-<div mat-dialog-content class="dialog-content">
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Оценка</mat-label>
-    <input matInput [(ngModel)]="score" placeholder="Оценка" type="number"  min="0" max="6"/>
+<h2 mat-dialog-title>Выберите название колонки</h2>
+<mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Название колонки</mat-label>
+    <mat-select [(value)]="selectedScoreName">
+      <mat-option *ngFor="let name of data.availableNames" [value]="name">{{ name }}</mat-option>
+    </mat-select>
   </mat-form-field>
-</div>
-<div mat-dialog-actions class="dialog-actions">
-  <button mat-button (click)="onNoClick()" class="cancel-button">Отмена</button>
-  <button mat-button (click)="onConfirm()" color="primary" class="confirm-button">Подтвердить</button>
-</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Отмена</button>
+  <button mat-button (click)="onConfirm()" [disabled]="!selectedScoreName">Подтвердить</button>
+</mat-dialog-actions>
