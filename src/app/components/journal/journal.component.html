@@ -1,8 +1,7 @@
-<div class="container mt-4">
-    <div class="row mb-5">
+<div class="container">
+    <div class="row">
         <div class="col">
-            <h3 class="text-center">Journal</h3>
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th class="text-center">Name</th>
@@ -18,7 +17,20 @@
                         <tr *ngFor="let student of team.students">
                             <td [ngClass]="{'bg-yellow': i === 0, 'bg-blue': i === 1}">{{ student.name }}</td>
                             <td class="text-center" *ngFor="let lesson of lessons">
-                                {{ checkAttendance(student.id, lesson.id) }}
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle border border-secondary text-dark bg-white"
+                                        type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        {{ checkAttendance(student.id, lesson.id) }}
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="#"
+                                                (click)="setAttendance(student.id, lesson.id, true)">+</a></li>
+                                        <li><a class="dropdown-item" href="#"
+                                                (click)="setAttendance(student.id, lesson.id, false)">-</a></li>
+                                    </ul>
+                                </div>
+
                             </td>
                         </tr>
                     </ng-container>
@@ -27,13 +39,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        <button class="btn btn-warning" style="margin-right: 5%; " (click)="openAddAttendanceModal()">Add
-            Attendance</button>
-        <button class="btn btn-success" (click)="generatePairs()">
-            Generate Pairs
-        </button>
-        <button class="btn btn-primary" (click)="openAddLessonModal()" style="margin-left: 5%;">
-            Add Lesson
-        </button>
+        <button class="btn btn-success" (click)="generatePairs()">Generate Pairs</button>
+        <button class="btn btn-primary" (click)="openAddLessonModal()" style="margin-left: 5%;">Add Lesson</button>
     </div>
 </div>
