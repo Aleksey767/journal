@@ -1,0 +1,24 @@
+<div class="container mt-3">
+    <div class="row mb-3">
+      <div class="col">
+        <mat-form-field appearance="fill" class="w-100"> 
+          <input matInput placeholder="Enter email" [(ngModel)]="email" />
+        </mat-form-field>
+      </div>
+      <div class="col-auto">
+        <button mat-raised-button color="primary" (click)="sendEmail()">Send</button>
+      </div>
+    </div>
+  
+    <div class="row mb-3">
+      <div class="col">
+        <mat-form-field appearance="fill" class="w-100"> 
+          <input matInput placeholder="Telegram Chat ID" [(ngModel)]="telegramChatId" />
+        </mat-form-field>
+      </div>
+      <div class="col-auto">
+        <button mat-raised-button color="primary" (click)="sendTelegramChatId()">Send</button>
+      </div>
+    </div>
+  </div>
+  

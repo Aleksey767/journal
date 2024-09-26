@@ -5,11 +5,13 @@ import { PairTableComponent } from "./components/pair-table/pair-table.component
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { CommonModule } from '@angular/common';
 import {GradesComponent} from "./components/grades/grades.component";
+import { ActivityComponent } from './components/activity/activity.component';
+import { ReportComponent } from "./components/report/report.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, JournalComponent, PairTableComponent, CommonModule,GradesComponent,StudentListComponent],
+  imports: [RouterOutlet, JournalComponent, PairTableComponent, CommonModule, GradesComponent, StudentListComponent, ActivityComponent, ReportComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'] 
 })

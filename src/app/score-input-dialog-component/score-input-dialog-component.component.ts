@@ -24,6 +24,4 @@ export class ScoreInputDialogComponent {
   onConfirm(): void {
     this.dialogRef.close(this.score);
   }
-
-  
 }
