@@ -1,12 +1,13 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { AppRoutingModule } from './app.routes';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
-  provideRouter(AppRoutingModule.routes)
+  provideRouter(AppRoutingModule.routes), provideAnimationsAsync()
   ]
 };

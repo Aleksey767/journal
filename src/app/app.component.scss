@@ -5,7 +5,7 @@ body {
 }
 
 .full-height {
-    height: 100vh; /* Высота в 100% от высоты экрана */
+    height: 100vh; 
 }
 
 .rounded-container {
@@ -25,6 +25,7 @@ body {
     background-color: #f0f0f0;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .sidebar a {
@@ -55,16 +56,33 @@ body {
 }
 
 .journal-content {
-    flex: 0 0 50%; /* Компонент app-journal занимает 50% ширины */
+    background-color: #fff;   
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    flex: 0 0 50%;  
     display: flex;
-    align-items: flex-start; /* Прикрепляем к левому краю */
+    align-items: flex-start; 
     justify-content: flex-start;
 }
 
 .pair-table-container {
-    flex: 1; /* Компонент app-pair-table занимает оставшееся пространство */
+    flex: 1;  
+    
+    background-color: #fff;  
+    border-left: 1px solid rgba(0, 0, 0, 0.1);    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding-left: 20px;  
+}
+.activity-container, .report-container {
     display: flex;
-    justify-content: center; /* Центрируем его горизонтально */
-    align-items: center; /* Центрируем его вертикально */
-    padding-left: 20px; /* Отступ между journal и таблицей */
+    flex-direction: column;    
+    height: 100vh;            
+    width: 100%;             
+    margin: 0;                
+    text-align: center;       
+    padding: 20px;           
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    border-radius: 8px;       
+    background-color: #fff; 
 }

@@ -3,8 +3,8 @@
         <div class="sidebar">
             <a (click)="setActiveTab('journal')" [ngClass]="{'active': isActive('journal')}">Attendance</a>
             <a (click)="setActiveTab('grades')" [ngClass]="{'active': isActive('grades')}">Grades</a>
-            <a (click)="setActiveTab('tab3')" [ngClass]="{'active': isActive('tab3')}">Activity</a>
-            <a (click)="setActiveTab('tab4')" [ngClass]="{'active': isActive('tab4')}">Report</a>
+            <a (click)="setActiveTab('activity')" [ngClass]="{'active': isActive('activity')}">Activity</a>
+            <a (click)="setActiveTab('report')" [ngClass]="{'active': isActive('report')}">Report</a>
         </div>
 
         <div class="content d-flex">
@@ -20,6 +20,20 @@
             <ng-container *ngIf="isActive('grades')">
                 <app-grades></app-grades>
             </ng-container>
+
+            <ng-container *ngIf="isActive('activity')">
+                <div class="activity-container">
+                    <app-activity></app-activity>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="isActive('report')">
+            <div class="report-container">
+                <app-report></app-report>
+            </div>
+            </ng-container>
+
+
         </div>
     </div>
 </div>
