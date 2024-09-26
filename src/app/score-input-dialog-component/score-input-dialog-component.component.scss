@@ -1,0 +1,27 @@
+  
+  .dialog-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .dialog-title{
+    font-family: 'Roboto Mono',italic;
+    font-size:0.6cm
+  }
+  
+  .form-field {
+    width: 100%;
+  }
+  
+  .dialog-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+
+  .cancel-button:hover,
+  .confirm-button:hover {
+    opacity: 0.8; /* Эффект при наведении */
+  }

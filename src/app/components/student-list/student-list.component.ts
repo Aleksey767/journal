@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
+import { ScoreInputDialogComponent } from '../../score-input-dialog-component/score-input-dialog-component.component';
 
 
 interface Participant {
@@ -25,13 +26,13 @@ export class StudentListComponent {
       {name: 'Student2', scores: {}}
     ];
     teamB: Participant[] = [
-      { name: 'Charlie', scores: {} },
-      { name: 'David', scores: {} }
+      { name: 'Student3', scores: {} },
+      { name: 'Student4', scores: {} }
     ];
 
     scoreColumns: string[] = []
 
-    constructor(public dialogRef: MatDialogRef<StudentListComponent>) {}
+    constructor(public dialogRef: MatDialogRef<StudentListComponent>, private dialog: MatDialog) {}
 
   
 
@@ -47,66 +48,55 @@ export class StudentListComponent {
   }
 
   addScoreColumn() {
-    const currentDate = new Date();
+        const currentDate = new Date();
         const formattedDate = currentDate.toLocaleDateString();
-        this.scoreColumns.push(formattedDate);
-        this.updateScores(formattedDate);
+        if (!this.scoreColumns.includes(formattedDate)) {
+          this.scoreColumns.push(formattedDate);
+          this.updateScores(formattedDate);
+      } else {
+          console.log("Оценка за " + formattedDate + " уже существует!");
+          this.updateScores(formattedDate);
+      }
   }
 
-  updateScores(scoreKey: string) {
-    this.teamA.forEach(participant => {
-      participant.scores[scoreKey] = Math.floor(Math.random() * 100);
-    });
-    this.teamB.forEach(participant => {
-      participant.scores[scoreKey] = Math.floor(Math.random() * 100);
-    });
-  }
+  async updateScores(scoreKey: string) {
+    const maxParticipants = Math.max(this.teamA.length, this.teamB.length);
+
+    for (let i = 0; i < maxParticipants; i++) {
+        if (i < this.teamA.length) {
+            const dialogRef = this.dialog.open(ScoreInputDialogComponent);
+            const score = await dialogRef.afterClosed().toPromise();
+            if (score !== undefined) {
+                // проверка на существование оценки
+                if (!this.teamA[i].scores[scoreKey]) {
+                    this.teamA[i].scores[scoreKey] = score;
+                } else {
+                    // this.teamA[i].scores[scoreKey] += score; // для суммирования
+                    console.log("Оценка для " + `${this.teamA[i].name}` + " уже существует!");
+                    this.teamA[i].scores[scoreKey] = score;
+                }
+            }
+        }
+
+        if (i < this.teamB.length) {
+            const dialogRef = this.dialog.open(ScoreInputDialogComponent);
+            const score = await dialogRef.afterClosed().toPromise();
+            if (score !== undefined) {
+                
+                if (!this.teamB[i].scores[scoreKey]) {
+                    this.teamB[i].scores[scoreKey] = score;
+                } else {
+                    // this.teamB[i].scores[scoreKey] += score;
+                    console.log("Оценка для " + `${this.teamB[i].name}` + " уже существует!");
+                    this.teamB[i].scores[scoreKey] = score;
+                }
+            }
+        }
+    }
+}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
 }
-
-
-
-
-
-
-
-// import { Component } from '@angular/core';
-// import { MatDialogRef } from '@angular/material/dialog';
-// import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-// import { MatDialogModule } from '@angular/material/dialog';
-
-
-
-
-// @Component({
-//   selector: 'app-student-list',
-//   standalone: true,
-//   imports: [MatDialogModule],
-//   templateUrl: './student-list.component.html',
-//   styleUrl: './student-list.component.scss'
-// })
-// export class StudentListComponent {
-//   teamA = ['Студент 1', 'Студент 2', 'Студент 3'];
-//   teamB = ['Студент 4', 'Студент 5', 'Студент 6'];
-
-//   constructor(public dialogRef: MatDialogRef<StudentListComponent>) {}
-
-//   drop(event: CdkDragDrop<string[]>) {
-//     if (event.previousContainer === event.container) {
-//       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-//     } else {
-//       transferArrayItem(event.previousContainer.data,
-//                         event.container.data,
-//                         event.previousIndex,
-//                         event.currentIndex);
-//     }
-//   }
-
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
-// }
