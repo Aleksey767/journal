@@ -1,10 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LessonModalComponent } from '../lesson-modal/lesson-modal.component';
 import { AttendanceModalComponent } from '../attendance-modal/attendance-modal.component'; 
+import { StudentListComponent } from '../student-list/student-list.component'; 
+import { MatDialog } from '@angular/material/dialog';
+
 
 export interface Student {
   id: number;
@@ -51,7 +54,10 @@ export class JournalComponent implements OnInit {
   pairs: { teamA: string; teamB: string }[] = [];
   @Output() pairsGenerated = new EventEmitter<{ teamA: string; teamB: string }[]>();
 
-  constructor(private http: HttpClient, private modalService: NgbModal) { }
+
+
+  constructor(public dialog: MatDialog, private http: HttpClient, private modalService: NgbModal) { }
+
 
   ngOnInit(): void {
     
@@ -133,7 +139,6 @@ export class JournalComponent implements OnInit {
       }
     });
   }
-
   openAddLessonModal() {
     const modalRef = this.modalService.open(LessonModalComponent);
     modalRef.result.then(
@@ -169,6 +174,44 @@ export class JournalComponent implements OnInit {
 
     this.pairsGenerated.emit(this.pairs);
   }
+
+  formatDates() {
+    this.formattedDates = this.lessons.map(lesson => {
+      const date = new Date(lesson.date * 1000);
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}.${month}.${year}`;
+    });
+  }
+
+  checkAttendance(studentId: number, lessonId: number): string {
+    const log = this.attendanceLog.find(
+      (log) => log.studentId === studentId && log.lessonId === lessonId
+    );
+    return log && log.isAttended ? '+' : '-';
+  }
+  openAddAttendanceModal() {
+    const modalRef = this.modalService.open(AttendanceModalComponent);
+    modalRef.componentInstance.students = this.getStudents();
+    modalRef.componentInstance.lessons = this.lessons;
+  }
+
+  openStudentList() {
+    const dialogRef = this.dialog.open(StudentListComponent, {
+      width: '1200px', height: '800px',
+      data: {} 
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('modal window closed');
+    });
+  }
+
+
+
+  getStudents(): { id: number; name: string }[] {
+    return this.teams.flatMap(team => team.students.map(student => ({ id: student.id, name: student.name })));
 
   private shuffleArray(array: any[]) {
     for (let i = array.length - 1; i > 0; i--) {

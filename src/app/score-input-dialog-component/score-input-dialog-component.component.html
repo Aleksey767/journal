@@ -1,0 +1,11 @@
+<h1 mat-dialog-title class="dialog-title">Введите оценку</h1>
+<div mat-dialog-content class="dialog-content">
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Оценка</mat-label>
+    <input matInput [(ngModel)]="score" placeholder="Оценка" type="number"  min="0" max="6"/>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button (click)="onNoClick()" class="cancel-button">Отмена</button>
+  <button mat-button (click)="onConfirm()" color="primary" class="confirm-button">Подтвердить</button>
+</div>
