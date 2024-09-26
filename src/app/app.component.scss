@@ -1,0 +1,70 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+}
+
+.full-height {
+    height: 100vh; /* Высота в 100% от высоты экрана */
+}
+
+.rounded-container {
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar {
+    flex: 0 0 250px;
+    font-family: 'Roboto Mono', italic;
+    height: 100%;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #000;
+    border-radius: 4px;
+    background-color: #ececec;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #c0c0c0;
+}
+
+.sidebar a.active {
+    background-color: #ffffff;
+    border-left: 9px solid rgb(28, 196, 140);
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    background-color: #f2f2f2;
+}
+
+.journal-content {
+    flex: 0 0 50%; /* Компонент app-journal занимает 50% ширины */
+    display: flex;
+    align-items: flex-start; /* Прикрепляем к левому краю */
+    justify-content: flex-start;
+}
+
+.pair-table-container {
+    flex: 1; /* Компонент app-pair-table занимает оставшееся пространство */
+    display: flex;
+    justify-content: center; /* Центрируем его горизонтально */
+    align-items: center; /* Центрируем его вертикально */
+    padding-left: 20px; /* Отступ между journal и таблицей */
+}

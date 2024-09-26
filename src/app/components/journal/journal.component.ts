@@ -57,6 +57,88 @@ export class JournalComponent implements OnInit {
 
 
   constructor(public dialog: MatDialog, private http: HttpClient, private modalService: NgbModal) { }
+
+
+  ngOnInit(): void {
+    
+    this.http.get<Data>('http://13.60.83.249:8085/journalApp/api/v1/journal').subscribe({
+      next: (data) => {
+        this.attendanceLog = data.attendanceLogs;
+        this.lessons = data.lessons;
+        this.teams = data.teams;
+
+        this.teams.forEach((team: Team) => {
+          team.students.forEach((student: Student) => {
+            this.names[student.id] = student.name;
+          });
+        });
+
+        this.formatDates();
+      },
+      error: (error) => {
+        console.error('Loading journal - FAIL', error);
+      },
+      complete: () => {
+        console.log('Loading journal - OK');
+      }
+    });
+  }
+
+  openAddAttendanceModal() {
+    const modalRef = this.modalService.open(AttendanceModalComponent);
+    modalRef.componentInstance.students = this.getStudents();
+    modalRef.componentInstance.lessons = this.lessons;
+  }
+
+  getStudents(): { id: number; name: string }[] {
+    return this.teams.flatMap(team => team.students.map(student => ({ id: student.id, name: student.name })));
+  }
+
+  formatDates() {
+    this.formattedDates = this.lessons.map(lesson => {
+      const date = new Date(lesson.date * 1000);
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}.${month}.${year}`;
+    });
+  }
+
+  checkAttendance(studentId: number, lessonId: number): string {
+    const log = this.attendanceLog.find(
+      (log) => log.studentId === studentId && log.lessonId === lessonId
+    );
+    return log && log.isAttended ? '+' : '-';
+  } 
+
+  setAttendance(studentId: number, lessonId: number, isAttended: boolean) {
+    // Обновляем локально для отображения на экране без перезагрузки
+    const log = this.attendanceLog.find(
+      (log) => log.studentId === studentId && log.lessonId === lessonId
+    );
+    
+    if (log) {
+      log.isAttended = isAttended;
+    } else {
+      this.attendanceLog.push({ studentId, lessonId, isAttended, id: Date.now() });
+    }
+
+    // Отправка данных на сервер
+    const requestBody = {
+      studentId: studentId,
+      lessonId: lessonId,
+      attended: isAttended
+    };
+
+    this.http.post('http://13.60.83.249:8085/journalApp/api/v1/attendancelog', requestBody).subscribe({
+      next: (response) => {
+        console.log('Attendance updated successfully', response);
+      },
+      error: (error) => {
+        console.error('Error updating attendance', error);
+      }
+    });
+  }
   openAddLessonModal() {
     const modalRef = this.modalService.open(LessonModalComponent);
     modalRef.result.then(
@@ -68,13 +150,7 @@ export class JournalComponent implements OnInit {
       }
     );
   }
-  private shuffleArray(array: any[]) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
+
   generatePairs() {
     const teamAStudents = this.teams[0]?.students || [];
     const teamBStudents = this.teams[1]?.students || [];
@@ -136,29 +212,14 @@ export class JournalComponent implements OnInit {
 
   getStudents(): { id: number; name: string }[] {
     return this.teams.flatMap(team => team.students.map(student => ({ id: student.id, name: student.name })));
+
+  private shuffleArray(array: any[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   }
 
-  ngOnInit(): void {
-    this.http.get<Data>('http://13.60.83.249:8085/journalApp/api/v1/journal').subscribe({
-      next: (data) => {
-        this.attendanceLog = data.attendanceLogs;
-        this.lessons = data.lessons;
-        this.teams = data.teams;
-
-        this.teams.forEach((team: Team) => {
-          team.students.forEach((student: Student) => {
-            this.names[student.id] = student.name;
-          });
-        });
-
-        this.formatDates();
-      },
-      error: (error) => {
-        console.error('Loading journal - FAIL', error);
-      },
-      complete: () => {
-        console.log('Loading journal - OK');
-      }
-    });
-  }
+  
 }

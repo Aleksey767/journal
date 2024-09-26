@@ -1,2 +1,25 @@
-<app-journal (pairsGenerated)="pairs = $event"></app-journal> 
-<app-pair-table [pairs]="pairs"></app-pair-table>
+<div class="d-flex justify-content-center align-items-center full-height">
+    <div class="d-flex rounded-container" style="width: 85%; height: 85%;">
+        <div class="sidebar">
+            <a (click)="setActiveTab('journal')" [ngClass]="{'active': isActive('journal')}">Attendance</a>
+            <a (click)="setActiveTab('grades')" [ngClass]="{'active': isActive('grades')}">Grades</a>
+            <a (click)="setActiveTab('tab3')" [ngClass]="{'active': isActive('tab3')}">Activity</a>
+            <a (click)="setActiveTab('tab4')" [ngClass]="{'active': isActive('tab4')}">Report</a>
+        </div>
+
+        <div class="content d-flex">
+            <ng-container *ngIf="isActive('journal')">
+                <div class="journal-content">
+                    <app-journal (pairsGenerated)="onPairsGenerated($event)"></app-journal>
+                </div>
+                <div class="pair-table-container">
+                    <app-pair-table [pairs]="pairs"></app-pair-table>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="isActive('grades')">
+                <app-grades></app-grades>
+            </ng-container>
+        </div>
+    </div>
+</div>
